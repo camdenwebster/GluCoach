@@ -22,7 +22,9 @@ enum HealthMetricContext: CaseIterable, Identifiable {
 }
 
 struct DashboardView: View {
+    
     @State private var selectedStat: HealthMetricContext = .steps
+    
     var isSteps: Bool { selectedStat == .steps}
     
     var body: some View {
@@ -30,7 +32,8 @@ struct DashboardView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     Picker("Selected State", selection: $selectedStat) {
-                        ForEach(HealthMetricContext.allCases) { metric in Text(metric.title)
+                        ForEach(HealthMetricContext.allCases) {
+                            Text($0.title)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -61,7 +64,8 @@ struct DashboardView: View {
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
                     
-                    VStack(alignment: .leading) {                          VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        VStack(alignment: .leading) {
                             Label("Averages", systemImage: "calendar")
                                 .font(.title3.bold())
                                 .foregroundStyle(.pink)
@@ -70,9 +74,9 @@ struct DashboardView: View {
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
-                    .padding(.bottom, 12)
+                        .padding(.bottom, 12)
                         
-                    RoundedRectangle(cornerRadius: 12)
+                        RoundedRectangle(cornerRadius: 12)
                             .foregroundStyle(.secondary)
                             .frame(height: 240)
                     }
